@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Legal Analysis</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0; padding: 0; }
+        .header { background-color: #ffd700; display: flex; justify-content: space-between; padding: 10px; align-items: center; }
+        .logo { font-size: 24px; color: #000080; display: flex; align-items: center; }
+        .content { padding: 20px; }
+        .case { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">📚 Lawfi</div>
+        <img src="https://via.placeholder.com/40" alt="Profile" class="profile">
+    </div>
+    <div class="content">
+        <h2>User Case: {{ description }}</h2>
+        <h3>Similar Cases:</h3>
+        {% for case in cases %}
+            <div class="case">
+                <p><strong>Decision:</strong> {{ case.decision }}</p>
+                <p><strong>Plaintiff Won:</strong> {{ 'Yes' if case.plaintiff_won else 'No' }}</p>
+            </div>
+        {% endfor %}
+        <h3>Comparison Analysis:</h3>
+        {% for sim in similarities %}
+            <div class="case">
+                <p><strong>Case:</strong> {{ sim.title }}</p>
+                <p><strong>Common Issues:</strong> {{ sim.common_issues|join(', ') or 'None' }}</p>
+                <p><strong>Differences:</strong> {{ sim.differences|join(', ') or 'None' }}</p>
+            </div>
+        {% endfor %}
+        <h3>Estimated Plaintiff Win Probability: {{ win_probability }}%</h3>
+        <h3>Personalized Judgment:</h3>
+        <pre>{{ judgment }}</pre>
+    </div>
+</body>
+</html>
